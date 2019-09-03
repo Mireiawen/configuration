@@ -1,0 +1,23 @@
+{
+	"name": "mireiawen/configuration",
+	"description": "JSON configuration file reader",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mira Manninen",
+			"email": "mir@mireiawen.net"
+		}
+	],
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=7.3.0",
+		"ext-gettext": "*",
+		"ext-json": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Mireiawen\\Configuration\\": "includes/"
+		}
+	}
+}
