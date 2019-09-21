@@ -9,6 +9,9 @@ JSON configuration file helper
 * JSON extension
 * PHP 7
 
+## Installation
+You can clone or download the code from the [GitHub repository](https://github.com/Mireiawen/configuration) or you can use composer: `composer require mireiawen/configuration`
+
 ## Methods
 
 ### __construct
