@@ -1,6 +1,6 @@
 {
 	"name": "mireiawen/configuration",
-	"description": "JSON configuration file reader",
+	"description": "Configuration file reader",
 	"type": "library",
 	"license": "MIT",
 	"authors": [
