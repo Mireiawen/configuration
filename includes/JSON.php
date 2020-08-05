@@ -63,7 +63,17 @@ class JSON extends ConfigurationBase
 	 */
 	public function Has(string $key) : bool
 	{
-		return isset($this->data[$key]);
+		try
+		{
+			$this->GetSubkey($key, NULL, $this->data);
+		}
+			/** @noinspection BadExceptionsProcessingInspection */
+		catch (MissingValue $exception)
+		{
+			return FALSE;
+		}
+		
+		return TRUE;
 	}
 	
 	/**
@@ -84,16 +94,55 @@ class JSON extends ConfigurationBase
 	 */
 	public function Get(string $key, $default = NULL)
 	{
-		if (isset($this->data[$key]))
+		return $this->GetSubkey($key, $default, $this->data);
+	}
+	
+	/**
+	 * Check for subkey existence in arrays
+	 *
+	 * @param string $key
+	 *    The key to retrieve
+	 *
+	 * @param $default
+	 *    The default value for the key, NULL to throw error if key is not set
+	 *
+	 * @param array $data
+	 *    The current data array to read
+	 *
+	 * @return mixed
+	 *    The value of the key
+	 *
+	 * @throws MissingValue
+	 *    If the key is not set and no default value is specified
+	 */
+	private function GetSubkey(string $key, $default, array $data)
+	{
+		$pos = \strpos($key, '/');
+		
+		// Check for subkey
+		if ($pos !== FALSE)
 		{
-			return $this->data[$key];
+			$subkey = substr($key, $pos + 1);
+			$key = substr($key, 0, $pos);
+			
+			if (isset($data[$key]) && \is_array($data[$key]))
+			{
+				return $this->GetSubkey($subkey, $default, $data[$key]);
+			}
 		}
 		
-		if ($default === NULL)
+		// Check for data
+		if (isset($data[$key]))
 		{
-			throw new MissingValue($key);
+			return $data[$key];
 		}
 		
-		return $default;
+		// Check for default
+		if ($default !== NULL)
+		{
+			return $default;
+		}
+		
+		throw new MissingValue($key);
 	}
 }
