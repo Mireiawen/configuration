@@ -37,6 +37,25 @@ Configuration::__construct(string $filename)
 | `MissingExtension` | When expected extensions are not available                    |
 | `InvalidFile`      | When the configuration file is missing or not readable        |
 
+## YAML specific methods
+
+### __construct
+YAML class constructor
+```php
+Configuration::__construct(string $filename)
+```
+
+#### Arguments
+| Type       | Name        | Description                |
+|------------|-------------|----------------------------|
+| **string** | `$filename` | The YAML file name to read |
+
+#### Exceptions thrown
+| Type               | Description                                                   |
+|--------------------|---------------------------------------------------------------|
+| `MissingExtension` | When expected extensions are not available                    |
+| `InvalidFile`      | When the configuration file is missing or not readable        |
+
 ## Common interface methods
 
 * [Has](#Has)
