@@ -13,7 +13,8 @@
 	"require": {
 		"php": ">=7.3.0",
 		"ext-gettext": "*",
-		"ext-json": "*"
+		"ext-json": "*",
+		"ext-yaml": "*"
 	},
 	"autoload": {
 		"psr-4": {
