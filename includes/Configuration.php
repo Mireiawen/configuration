@@ -12,6 +12,31 @@ namespace Mireiawen\Configuration;
 interface Configuration
 {
 	/**
+	 * Initialize the configuration class, optionally load configuration file as well
+	 *
+	 * @param string|null $filename
+	 *    The configuration file to load
+	 *
+	 * @throws MissingExtension
+	 *    In case of a required extension is missing
+	 *
+	 * @throws InvalidFile
+	 *    In case of unable to read or process the configuration file
+	 */
+	public function __construct(?string $filename = NULL);
+	
+	/**
+	 * Load a configuration file
+	 *
+	 * @param string $filename
+	 *    The configuration file to load
+	 *
+	 * @throws InvalidFile
+	 *    In case of unable to read or process the configuration file
+	 */
+	public function Load(string $filename) : void;
+	
+	/**
 	 * Check if the configuration variable exists and is set
 	 *
 	 * @param string $key

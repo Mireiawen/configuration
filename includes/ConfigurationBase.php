@@ -214,4 +214,53 @@ abstract class ConfigurationBase implements Configuration
 	{
 		return (bool)$this->Get($key, $default);
 	}
+	
+	/**
+	 * Check for subkey existence in arrays
+	 *
+	 * @param string $key
+	 *    The key to retrieve
+	 *
+	 * @param $default
+	 *    The default value for the key, NULL to throw error if key is not set
+	 *
+	 * @param array $data
+	 *    The current data array to read
+	 *
+	 * @return mixed
+	 *    The value of the key
+	 *
+	 * @throws MissingValue
+	 *    If the key is not set and no default value is specified
+	 */
+	protected function GetSubkey(string $key, $default, array $data)
+	{
+		$pos = \strpos($key, '/');
+		
+		// Check for subkey
+		if ($pos !== FALSE)
+		{
+			$subkey = substr($key, $pos + 1);
+			$key = substr($key, 0, $pos);
+			
+			if (isset($data[$key]) && \is_array($data[$key]))
+			{
+				return $this->GetSubkey($subkey, $default, $data[$key]);
+			}
+		}
+		
+		// Check for data
+		if (isset($data[$key]))
+		{
+			return $data[$key];
+		}
+		
+		// Check for default
+		if ($default !== NULL)
+		{
+			return $default;
+		}
+		
+		throw new MissingValue($key);
+	}
 }
