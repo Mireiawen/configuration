@@ -37,6 +37,13 @@ interface Configuration
 	public function Load(string $filename) : void;
 	
 	/**
+	 * Check if the configuration is loaded
+	 *
+	 * @return bool
+	 */
+	public function IsLoaded() : bool;
+	
+	/**
 	 * Check if the configuration variable exists and is set
 	 *
 	 * @param string $key

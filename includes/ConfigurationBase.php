@@ -12,6 +12,23 @@ namespace Mireiawen\Configuration;
 abstract class ConfigurationBase implements Configuration
 {
 	/**
+	 * Check if a configuration file is loaded
+	 *
+	 * @var bool
+	 */
+	protected bool $loaded = FALSE;
+	
+	/**
+	 * Check if the configuration is loaded
+	 *
+	 * @return bool
+	 */
+	public function IsLoaded() : bool
+	{
+		return $this->loaded;
+	}
+	
+	/**
 	 * Get the configuration variable and return its value, or default if it
 	 * is not set, and validating the type
 	 *

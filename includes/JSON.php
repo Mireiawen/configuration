@@ -15,7 +15,7 @@ class JSON extends ConfigurationBase
 	 *
 	 * @var array
 	 */
-	protected $data;
+	protected array $data;
 	
 	/**
 	 * Config constructor
@@ -66,6 +66,8 @@ class JSON extends ConfigurationBase
 		{
 			throw new InvalidFile($filename, 0, $exception);
 		}
+		
+		$this->loaded = TRUE;
 	}
 	
 	/**

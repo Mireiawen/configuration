@@ -15,7 +15,7 @@ class YAML extends ConfigurationBase
 	 *
 	 * @var array
 	 */
-	protected $data;
+	protected array $data;
 	
 	/**
 	 * Config constructor
@@ -59,6 +59,8 @@ class YAML extends ConfigurationBase
 		}
 		
 		$this->data = \yaml_parse_file($filename);
+		
+		$this->loaded = TRUE;
 	}
 	
 	/**
